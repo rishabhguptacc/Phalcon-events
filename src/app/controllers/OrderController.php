@@ -7,6 +7,7 @@ class OrderController extends Controller
     public function indexAction()
     {
         //return '<h1>Hello!!!</h1>';
+        $this->view->productList = Products::find();
     }
 
 

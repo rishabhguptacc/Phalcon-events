@@ -18,8 +18,23 @@
     </p>
 
     <p>
-        <label for="product">Product</label>
-        <?php echo $this->tag->textField("product"); ?>
+    <label for="product">Product</label>
+<?php
+        echo $this->tag->select(
+        [
+            'product',
+            $productList,
+            'using'      => [
+                'product_name', 
+                'product_name',
+            ],
+            'useEmpty'   => false,
+            'class' =>  "btn btn-outline-secondary btn-lg dropdown-toggle"
+        ]
+    );
+?>
+        
+        <?php //echo $this->tag->textField("product"); ?>
     </p>
 
     <p>
