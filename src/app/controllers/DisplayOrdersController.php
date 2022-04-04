@@ -6,6 +6,6 @@ class DisplayOrdersController extends Controller
 {
     public function indexAction()
     {
-        // return '<h1>inside DisplayOrdersController!!!</h1>';
+        $this->view->orders = Orders::find();
     }
 }
