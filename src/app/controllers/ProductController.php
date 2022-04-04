@@ -40,4 +40,9 @@ class ProductController extends Controller
         // passing a message to the view
         $this->view->message = $message;
     }
+
+    public function displayProductsAction()
+    {
+        $this->view->products = Products::find();
+    }
 }
