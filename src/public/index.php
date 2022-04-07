@@ -97,15 +97,15 @@ $container->set(
 // Event Managements ---------------------------------- STOP ------------------------------------
 
 
-$container->set(
-    'mongo',
-    function () {
-        $mongo = new MongoClient();
+// $container->set(
+//     'mongo',
+//     function () {
+//         $mongo = new MongoClient();
 
-        return $mongo->selectDB('phalt');
-    },
-    true
-);
+//         return $mongo->selectDB('phalt');
+//     },
+//     true
+// );
 
 try {
     // Handle the request

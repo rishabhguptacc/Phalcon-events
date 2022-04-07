@@ -17,15 +17,15 @@ class ProductController extends Controller
         $productData = $this->request->getPost();
         
         $eventsManager = $this->di->get('eventsManager');
-        $settings = Settings::find();
+        // $settings = Settings::find();
         $setting = Settings::findFirst();
-        $updatedValue = $eventsManager->fire('defaults:updateToDefaults', (object)$productData, $settings);
+        $updatedValue = $eventsManager->fire('defaults:updateToDefaults', (object)$productData, $setting);
 
         // print_r($productData);
         // print_r($setting);
         // print_r($settings);
-        print_r($updatedValue);
-        die;
+        // print_r($updatedValue);
+        // die;
 
         $updatedArray = array(
             'product_name' => $updatedValue->product_name,

@@ -7,17 +7,20 @@ class defaultProviders
 {
     public function updateToDefaults(Event $event, $values, $settings)
     {
-        if ($settings[0]->title_optimization == "with_tag") {
-            $values->product_name = $values->product_name.$values->tags;
+        // echo "event triggered \n";
+        if ($settings->title_optimization == "with_tag") {
+            $values->product_name = $values->product_name.'['.$values->tags.']';
         }
 
         if ($values->price == '') {
-            $values->price = $settings[0]->default_price;
+            $values->price = $settings->default_price;
         }
 
         if ($values->stock == '') {
-            $values->stock = $settings[0]->default_stock;
+            $values->stock = $settings->default_stock;
         }
+
+        return $values;
     }
 
 
