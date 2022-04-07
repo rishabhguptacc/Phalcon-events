@@ -15,8 +15,24 @@ class OrderController extends Controller
     {
         $order = new Orders;
 
+        $orderData = $this->request->getpost();
+
+        $settings = Settings::findFirst();
+
+        $eventsManager = $this->eventsManager;   // $this->di->get('eventsManager');
+
+        $updatedValue = $eventsManager->fire('defaults:updateToDefaultZipcode', (object)$orderData, $settings);
+
+        $updatedArray = array(
+            'customer_name' => $updatedValue->customer_name,
+            'customer_address' => $updatedValue->customer_address,
+            'zipcode' => $updatedValue->zipcode,
+            'product'=> $updatedValue->product,
+            'quantity' => $updatedValue->quantity
+        );
+
         $order->assign(
-            $this->request->getpost(),
+            $updatedArray,
             [
                 'customer_name',
                 'customer_address',

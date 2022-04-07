@@ -23,6 +23,14 @@ class defaultProviders
         return $values;
     }
 
-
+    public function updateToDefaultZipcode(Event $event, $values, $settings)
+    {
+        # code...
+        // print_r($settings); die;
+        if ($values->zipcode == '') {
+            $values->zipcode = $settings->default_zipcode;
+        }
+        return $values;
+    }
 // cmnt
 }
