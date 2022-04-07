@@ -33,7 +33,7 @@ class OrderController extends Controller
         $this->view->success = $success;
 
         if ($success) {
-            $message = "Thanks for registering!";
+            $message = "Thanks for ordering!";
         } else {
             $message = "Sorry, the following problems were generated:<br>"
                      . implode('<br>', $order->getMessages());

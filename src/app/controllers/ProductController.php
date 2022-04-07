@@ -13,8 +13,31 @@ class ProductController extends Controller
     {
         $product = new Products;
 
+        // $productData = $_POST;
+        $productData = $this->request->getPost();
+        
+        $eventsManager = $this->di->get('eventsManager');
+        $settings = Settings::find();
+        $setting = Settings::findFirst();
+        $updatedValue = $eventsManager->fire('defaults:updateToDefaults', (object)$productData, $settings);
+
+        // print_r($productData);
+        // print_r($setting);
+        // print_r($settings);
+        print_r($updatedValue);
+        die;
+
+        $updatedArray = array(
+            'product_name' => $updatedValue->product_name,
+            'description' => $updatedValue->description,
+            'tags' => $updatedValue->tags,
+            'price' => $updatedValue->price,
+            'stock' =>  $updatedValue->stock
+        );
+
+
         $product->assign(
-            $this->request->getpost(),
+            $updatedArray,
             [
                 'product_name',
                 'description',
@@ -31,7 +54,7 @@ class ProductController extends Controller
         $this->view->success = $success;
 
         if ($success) {
-            $message = "Thanks for registering!";
+            $message = "Product is added!";
         } else {
             $message = "Sorry, the following problems were generated:<br>"
                      . implode('<br>', $product->getMessages());

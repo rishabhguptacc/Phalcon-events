@@ -8,6 +8,8 @@ use Phalcon\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
 // use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use Phalcon\Events\Event;
+use Phalcon\Events\Manager as EventsManager;
 
 $config = new Config([]);
 
@@ -25,9 +27,17 @@ $loader->registerDirs(
     ]
 );
 
+
 $loader->register();
 
 $container = new FactoryDefault();
+
+$loader->registerNamespaces(
+    [
+        'App\Listeners' => APP_PATH . '/listeners'
+    ]
+);
+
 
 $container->set(
     'view',
@@ -66,8 +76,25 @@ $container->set(
 );
 
 
+// Event Managements ---------------------------------- START ------------------------------------
+
+$eventsManager = new EventsManager();
+
+$eventsManager->attach(
+    'defaults',
+    new \App\Listeners\defaultProviders()
+    // function (Event $event, $connection) {
+    //     // something to perform...
+    // }
+);
+
+$container->set(
+    'eventsManager',
+    $eventsManager
+);
 
 
+// Event Managements ---------------------------------- STOP ------------------------------------
 
 
 $container->set(

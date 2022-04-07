@@ -30,6 +30,19 @@ class SettingController extends Controller
         // Store and check for errors
         $success = $setting->save();
 
+
+
+        // ---------------1st event to be trigger here ---------------------------------------
+        /**
+         * if ($this->request->getpost(title_optimization) == 'with_tag') { event trigger to  }
+         */
+
+
+
+
+
+
+
         // passing the result to the view
         $this->view->success = $success;
 
